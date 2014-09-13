@@ -1,3 +1,62 @@
+13.09 21:00
+//Get info + abstract class.
+package random;
+
+import java.util.Scanner;
+
+abstract class Operation{
+}
+class Plus extends Operation{
+	void operate(){
+		int myArray[] = null;
+		int result=0;
+	    for(int i=0; i< myArray.length; i++) {
+	    	result=result+myArray[i];
+	    }
+	}
+	class Multiply extends Operation{
+		void operate(){
+			int myArray[] = null;
+			int result=0;
+		    for(int i=0; i< myArray.length; i++) {
+		    	result=result*myArray[i];
+		    }
+		}
+}
+
+public static class Example {
+	Scanner scanner = new Scanner(System.in);
+	
+public static void getInfo(){
+	Scanner scanner = new Scanner(System.in);
+	String a = scanner.nextLine();
+	String[] parts = a.split(" ");
+	double[] mas = new double[parts.length];
+	for (int i = 0; i< parts.length; i++) {
+	mas[i] = Double.valueOf(parts[i]);
+	}
+	
+	String difficcultyLevel = parts[0];
+	String iterationCount = parts[1];
+	String operationType = parts[2];
+	
+	System.out.println(difficcultyLevel);
+}
+	
+	public static void main(String[] args) {
+		System.out.println("Введите уровень сложности. Чем больше число, тем сложнее.");
+		System.out.println("Выберите количество итераций.");
+		System.out.println("Выберите вид операции: +, -, * или /");
+		System.out.println("Значения вводите в одну строку, через пробелы.");
+		
+        getInfo();
+
+}
+}
+}
+
+
+
 13.09 20:32
 //Gets info
 
