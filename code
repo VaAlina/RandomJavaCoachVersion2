@@ -1,3 +1,154 @@
+14.09 15:15
+package test;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Plus extends Example{
+	public Plus(int varlength, int iteration, String operation) {
+		super(varlength, iteration, operation);
+	
+	}
+	@Override
+	void iterate(){
+		Scanner scanner = new Scanner(System.in);
+		int i = 0;
+	while (i < iteration) {
+		int var1 = (int) Math.round(Math.random() * Math.pow(10, varlength));//Переменная 1 = округлённому случайному числу
+		int var2 = (int) Math.round(Math.random() * Math.pow(10, varlength));//умноженному на 10, возведённую в степень varlength. 
+		                                                                     //Это будет максимальное число(10^2 = 100).
+		System.out.println(var1 + " + " + var2 + " = \n");
+		int sum = (int) var1 + var2;
+		int res = scanner.nextInt();
+		if (sum == res) {
+		System.out.println(var1+" + " + var2+" = " +sum+ " Молодец.");
+		} else
+		System.out.println(var1+" + "+var2+" = " + res + " Правильный ответ "+sum);
+		
+		try {//Не смогла сделать отдельной функцией, т.к. компилятор требует объявить локальные переменные.
+			File file = new File("C://1//Random_14.09", "results.txt");// Благодаря этой строке, для каждого примера(читай "итерации") >>
+			//>>создаётся отдельный отдельный файл и заменяется новым. 
+			BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			output.write(var1+" + "+var2+" = " + res +" "+(var1+var2==res));
+			output.close();
+			} catch ( IOException e ) {
+			e.printStackTrace();
+			}
+		
+	    i++;
+		}
+}
+}
+
+14.09 15:15
+package test;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.Scanner;
+
+public class Multi extends Example{
+	public Multi(int varlength, int iteration, String operation) {
+		super(varlength, iteration, operation);
+	
+	}
+	@Override
+	void iterate(){
+		Scanner scanner = new Scanner(System.in);
+		int i = 0;
+	while (i < iteration) {
+		int var1 = (int) Math.round(Math.random() * Math.pow(10, varlength));//Переменная 1 = округлённому случайному числу
+		int var2 = (int) Math.round(Math.random() * Math.pow(10, varlength));//умноженному на 10, возведённую в степень varlength. 
+		                                                                     //Это будет максимальное число(10^2 = 100).
+		System.out.println(var1 + " * " + var2 + " = \n");
+		int sum = (int) var1 * var2;
+		int res = scanner.nextInt();
+		if (sum == res) {
+		System.out.println(var1+" * " + var2+" = " +sum+ " Молодец.");
+		} else
+		System.out.println(var1+" * "+var2+" = " + res + " Правильный ответ "+sum);
+		
+		try {//Не смогла сделать отдельной функцией, т.к. компилятор требует объявить локальные переменные.
+			File file = new File("C://1//Random_14.09", "results.txt");
+			BufferedWriter output = new BufferedWriter(new FileWriter(file));
+			output.write(var1+" * "+var2+" = " + res +" "+(var1*var2==res));
+			output.close();
+			} catch ( IOException e ) {
+			e.printStackTrace();
+			}
+	    i++;
+		}
+}
+}
+14.09 15:12
+package test;
+import java.util.Scanner;
+public class Main {
+
+	public static void main(String[] args) {
+		Scanner scanner = new Scanner(System.in);
+		System.out.println("Введите (число) количество нолей переменной. Количество итераций (число). \n"
+				+ "Вид операции (строка, напр.: +, -, *. /)");
+		System.out.println("Разделяйте символы пробелом либо символом перевода строки.");
+		int vl = scanner.nextInt();//varlength = длина переменной(10, 100)
+		int iter = scanner.nextInt();//Кол-во итераций
+		String op = scanner.next();//Вид операции
+		switch(op){//В зависимости от операции, создадим объект. Он может наследовать ...
+		case "+": Example example = new Plus(vl,iter, op); break;//...плюс и выполнять его методы, но
+		case "-": Example example = new Multi(vl,iter, op); break;//начиная с этой строки, компилятор "ругается"
+		default:  Example example = new Plus(vl,iter, op); break;//"Dublicate local variable example". Что делать?
+		}
+		example.iterate();
+		
+
+	}
+
+}
+14.09 15:12
+package test;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.*;
+
+public abstract class Example {
+	int varlength;
+	int iteration;
+	String operation;
+	
+	public Example(int varlength, int iteration, String operation){
+	this.varlength = varlength;
+	this.iteration = iteration;
+	this.operation = operation;
+	}
+
+    public int varlength() {
+    return varlength;
+    }
+    public int iteration() {
+    return iteration;
+    }
+	public String operation() {
+    return operation;
+	}
+abstract void iterate();	
+}
+
+
+/*
+***********************
+     Prev version
+***********************
+*/
+
+
 13.09 21:00
 //Get info + abstract class.
 package random;
